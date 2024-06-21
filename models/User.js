@@ -1,26 +1,15 @@
 import mongoose from "mongoose";
 import crypto from "crypto";
 
-const validPermissions = ['read', 'write', 'delete'];
-
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Name is required'],
-        minlength: [1, 'Name must be at least 1 character.'],
-        maxlength: [60, 'Name must be at most 60 characters.']
+        required: true
     },
     email: {
         type: String,
-        required: [true, 'Email is required.'],
+        required: true,
         unique: true,
-        validate: {
-            validator: function (value) {
-                // Regular expression to validate email format
-                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-            },
-            message: 'Invalid email format.'
-        }
     },
     userid: {
         type: String,
@@ -29,30 +18,20 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        required: [true, 'Role is required.'],
-        enum: {
-            values: ['admin', 'manager', 'staff'],
-            message: 'Role is invalid.'
-        }
+        required: true,
+        enum: { values: ['admin', 'manager', 'staff'] }
     },
     permissions: {
         type: [String],
-        required: [true, 'Permissions are required.'],
-        validate: {
-            validator: function (v) {
-                return v.every(permission => validPermissions.includes(permission));
-            },
-            message: props => `${props.value} is invalid.`
-        }
+        required: true,
     },
     phone: {
         type: String,
-        required: [true, 'Phone is required.'],
-        match: [/^\d{10}$/, 'Phone must be 10 digits long.']
+        required: true
     },
     password: {
         type: String,
-        required: [true, 'Password is required.']
+        required: true
     },
     createdAt: {
         type: Date,
