@@ -2,7 +2,6 @@ import Joi from 'joi';
 
 const schema = Joi.object({
     name: Joi.string()
-        .required()
         .min(1)
         .max(60)
         .messages({
@@ -14,7 +13,6 @@ const schema = Joi.object({
         }),
     email: Joi.string()
         .email({ tlds: { allow: false } })
-        .required()
         .messages({
             'string.base': 'Email must be a string.',
             'string.empty': 'Email is required.',
@@ -23,7 +21,6 @@ const schema = Joi.object({
         }),
     role: Joi.string()
         .valid('admin', 'manager', 'staff')
-        .required()
         .messages({
             'string.base': 'Role must be a string.',
             'string.empty': 'Role is required.',
@@ -32,7 +29,6 @@ const schema = Joi.object({
         }),
     phone: Joi.string()
         .pattern(/^\d{10}$/)
-        .required()
         .messages({
             'string.base': 'Phone must be a string.',
             'string.empty': 'Phone is required.',
@@ -41,18 +37,23 @@ const schema = Joi.object({
         }),
     password: Joi.string()
         .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/)
-        .required()
         .messages({
             'string.base': 'Password must be a string.',
             'string.empty': 'Password is required.',
             'string.pattern.base': 'Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one digit, and one special character.',
             'any.required': 'Password is required.',
         }),
+    permissions: Joi.array()
+        .items(Joi.string())
+        .messages({
+            'array.base': 'Permissions must be an array.',
+            'any.required': 'Permissions is required.',
+        }),
 }).unknown(false).messages({
     'object.unknown': 'Unknown field(s) in the request body.',
 });
 
-export default function validateUserCreateRequest(req, res, next) {
+export default function validateUserUpdateRequest(req, res, next) {
     try {
         const { error } = schema.validate(req.body);
         if (!error) {

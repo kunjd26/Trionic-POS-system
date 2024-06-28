@@ -7,6 +7,9 @@ const environmentConfig = {
     APP_URL: `${process.env.APP_HOST}:${process.env.APP_PORT}`,
 
     DB_CONNECTION_STRING: process.env.DB_CONNECTION_STRING,
+
+    PASSWORD_SALT: process.env.PASSWORD_SALT,
+    PASSWORD_DIGEST: process.env.PASSWORD_DIGEST,
 }
 
 const env = Object.freeze(environmentConfig);

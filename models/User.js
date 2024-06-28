@@ -46,7 +46,14 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre('save', function (next) {
     if (!this.userid) {
-        this.userid = crypto.randomBytes(3).toString('hex');
+        this.userid = crypto.randomBytes(3).toString('hex').toUpperCase();
+    }
+    if (this.role === 'admin') {
+        this.permissions = ['all:a'];
+    } else if (this.role === 'manager') {
+        this.permissions = ['all:cru'];
+    } else {
+        this.permissions = ['customer:r', 'order:r', 'product:r'];
     }
     next();
 });
