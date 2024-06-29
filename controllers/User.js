@@ -137,7 +137,7 @@ class UserController {
             await db.connect();
 
             // Update the token to expired.
-            const userToken = await UserToken.findOneAndUpdate({ token: token, isSignout: false, updatedAt: new Date() }, { isSignout: true });
+            const userToken = await UserToken.findOneAndUpdate({ token: token, isSignout: false }, { isSignout: true, updatedAt: new Date() });
 
             if (!userToken) {
                 return res.status(401).json({ status: 'fail', message: 'Token is invalid or expired.' });
