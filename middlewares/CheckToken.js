@@ -11,15 +11,15 @@ export default async function checkToken(req, res, next) {
 
         await db.connect();
 
-        const userToken = await UserToken.findOne({ token: token, isSignout: false }, 'userid');
+        const userToken = await UserToken.findOne({ token: token, isSignout: false }, 'userId');
 
         if (!userToken) {
             return res.status(401).json({ status: 'fail', message: 'Token is invalid or expired.' });
         }
 
         // Add userid in req.user object.
-        req.user = { userid: userToken.userid, token: token };
-        next();
+        req.user = { userId: userToken.userId, token: token };
+        return next();
 
     } catch (error) {
         next(error);

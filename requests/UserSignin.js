@@ -1,12 +1,12 @@
 import Joi from 'joi';
 
 const schema = Joi.object({
-    userid: Joi.string()
+    userId: Joi.string()
         .required()
         .messages({
-            'string.base': 'Userid must be a string.',
-            'string.empty': 'Userid is required.',
-            'any.required': 'Userid is required.',
+            'string.base': 'userId must be a string.',
+            'string.empty': 'userId is required.',
+            'any.required': 'userId is required.',
         }),
     password: Joi.string()
         .required()
@@ -22,12 +22,12 @@ const schema = Joi.object({
 export default function validateUserSigninRequest(req, res, next) {
     try {
         const { error } = schema.validate(req.body);
-        if (!error) {
-            return next();
+        if (error) {
+            let errorMessage = error.details[0].message;
+            return res.status(422).send({ status: "fail", message: errorMessage });
         }
-        let errorMessage = error.details[0].message;
-        res.status(422).send({ status: "fail", message: errorMessage });
 
+        return next();
     } catch (error) {
         next(error);
     }

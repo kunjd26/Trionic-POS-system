@@ -18,7 +18,7 @@ class UserController {
             await user.save();
 
             const response = {
-                userid: user.userid,
+                userId: user.userId,
                 name: user.name,
                 email: user.email,
                 role: user.role,
@@ -32,14 +32,14 @@ class UserController {
 
     async show(req, res, next) {
         try {
-            const userid = req.params.userid ?? undefined;
+            const objectId = req.params.objectId ?? undefined;
             let user;
 
             await db.connect();
-            if (userid) {
-                user = await User.findOne({ userid }, "userid name email phone role permissions");
+            if (objectId) {
+                user = await User.findById(objectId, "_id, userId name email phone role permissions");
             } else {
-                user = await User.find({}, "userid name email phone role permissions");
+                user = await User.find({}, "_id, userId name email phone role permissions");
             }
 
             if (!user) {
@@ -54,7 +54,7 @@ class UserController {
 
     async update(req, res, next) {
         try {
-            const userid = req.params.userid;
+            const objectId = req.params.objectId;
             const { name, email, role, phone, permissions } = req.body;
             let { password } = req.body;
 
@@ -63,7 +63,7 @@ class UserController {
             }
 
             await db.connect();
-            const user = await User.findOneAndUpdate({ userid }, { name, email, role, permissions, phone, password }, { new: true, fields: 'userid name email phone role permissions' });
+            const user = await User.findByIdAndUpdate(objectId, { name, email, role, permissions, phone, password, updatedAt: new Date() }, { new: true, fields: 'userid name email phone role permissions' });
 
             if (!user) {
                 return res.status(404).json({ status: 'fail', message: 'User not found.' });
@@ -77,11 +77,11 @@ class UserController {
 
     async destroy(req, res, next) {
         try {
-            const userid = req.params.userid;
+            const objectId = req.params.objectId;
 
             await db.connect();
 
-            const user = await User.findOneAndDelete({ userid });
+            const user = await User.findByIdAndDelete(objectId);
 
             if (!user) {
                 return res.status(404).json({ status: 'fail', message: 'User not found.' });
@@ -95,19 +95,19 @@ class UserController {
 
     async signin(req, res, next) {
         try {
-            const { userid, password } = req.body;
+            const { userId, password } = req.body;
             const hashedPassword = hashPassword(password);
             let queryObject;
 
             // 
-            if (emailIsValid(userid)) {
+            if (emailIsValid(userId)) {
                 queryObject = {
-                    email: userid,
+                    email: userId,
                     password: hashedPassword
                 }
             } else {
                 queryObject = {
-                    userid: userid,
+                    userId: userId,
                     password: hashedPassword
                 }
             }
@@ -121,7 +121,7 @@ class UserController {
             }
 
             const token = generateToken();
-            const userToken = new UserToken({ token: token, userid: user._id });
+            const userToken = new UserToken({ token: token, userId: user._id });
             await userToken.save();
 
             return res.status(200).json({ status: 'success', data: { token: token } });
@@ -137,7 +137,7 @@ class UserController {
             await db.connect();
 
             // Update the token to expired.
-            const userToken = await UserToken.findOneAndUpdate({ token: token, isSignout: false }, { isSignout: true });
+            const userToken = await UserToken.findOneAndUpdate({ token: token, isSignout: false, updatedAt: new Date() }, { isSignout: true });
 
             if (!userToken) {
                 return res.status(401).json({ status: 'fail', message: 'Token is invalid or expired.' });

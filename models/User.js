@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    userid: {
+    userId: {
         type: String,
         unique: true,
         immutable: true
@@ -45,8 +45,8 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre('save', function (next) {
-    if (!this.userid) {
-        this.userid = crypto.randomBytes(3).toString('hex').toUpperCase();
+    if (!this.userId) {
+        this.userId = crypto.randomBytes(3).toString('hex').toUpperCase();
     }
     if (this.role === 'admin') {
         this.permissions = ['all:a'];

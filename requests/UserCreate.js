@@ -55,12 +55,12 @@ const schema = Joi.object({
 export default function validateUserCreateRequest(req, res, next) {
     try {
         const { error } = schema.validate(req.body);
-        if (!error) {
-            return next();
+        if (error) {
+            let errorMessage = error.details[0].message;
+            return res.status(422).send({ status: "fail", message: errorMessage });
         }
-        let errorMessage = error.details[0].message;
-        res.status(422).send({ status: "fail", message: errorMessage });
 
+        return next();
     } catch (error) {
         next(error);
     }

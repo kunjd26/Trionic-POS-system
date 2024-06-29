@@ -5,11 +5,11 @@ export default function checkPermission(permission) {
 
     return async function (req, res, next) {
         try {
-            const userid = req.user.userid;
+            const userId = req.user.userId;
 
             await db.connect();
 
-            const user = await User.findById(userid, 'permissions');
+            const user = await User.findById(userId, 'permissions');
 
             if (!user) {
                 return res.status(404).json({ status: 'fail', message: 'User not found.' });
