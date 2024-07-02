@@ -37,9 +37,9 @@ class UserController {
 
             await db.connect();
             if (objectId) {
-                user = await User.findById(objectId, "_id, userId name email phone role permissions");
+                user = await User.findOne({ _id: objectId, isDeleted: false }, "_id, userId name email phone role permissions");
             } else {
-                user = await User.find({}, "_id, userId name email phone role permissions");
+                user = await User.find({ isDeleted: false }, "_id, userId name email phone role permissions");
             }
 
             if (!user) {
@@ -63,7 +63,7 @@ class UserController {
             }
 
             await db.connect();
-            const user = await User.findByIdAndUpdate(objectId, { name, email, role, permissions, phone, password, updatedAt: new Date() }, { new: true, fields: 'userid name email phone role permissions' });
+            const user = await User.findOneAndUpdate({ _id: objectId, isDeleted: false }, { name, email, role, permissions, phone, password, updatedAt: new Date() }, { new: true, fields: 'userid name email phone role permissions' });
 
             if (!user) {
                 return res.status(404).json({ status: 'fail', message: 'User not found.' });
@@ -81,7 +81,7 @@ class UserController {
 
             await db.connect();
 
-            const user = await User.findByIdAndDelete(objectId);
+            const user = await User.findOneAndUpdate({ _id: objectId, isDeleted: false }, { isDeleted: true });
 
             if (!user) {
                 return res.status(404).json({ status: 'fail', message: 'User not found.' });
@@ -103,12 +103,14 @@ class UserController {
             if (emailIsValid(userId)) {
                 queryObject = {
                     email: userId,
-                    password: hashedPassword
+                    password: hashedPassword,
+                    isDeleted: false
                 }
             } else {
                 queryObject = {
                     userId: userId,
-                    password: hashedPassword
+                    password: hashedPassword,
+                    isDeleted: false
                 }
             }
 
@@ -137,7 +139,7 @@ class UserController {
             await db.connect();
 
             // Update the token to expired.
-            const userToken = await UserToken.findOneAndUpdate({ token: token, isSignout: false }, { isSignout: true, updatedAt: new Date() });
+            const userToken = await UserToken.findOneAndUpdate({ token: token, isSignout: false, isDeleted: false }, { isSignout: true, updatedAt: new Date() });
 
             if (!userToken) {
                 return res.status(401).json({ status: 'fail', message: 'Token is invalid or expired.' });

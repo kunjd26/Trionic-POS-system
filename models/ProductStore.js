@@ -3,31 +3,30 @@ import mongoose from 'mongoose';
 const productStoreSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Name is required.'],
-        minlength: [1, 'Name must be at least 1 character long.'],
-        maxlength: [60, 'Name cannot exceed 60 characters.']
+        required: true
     },
     address: {
         type: String,
-        required: [true, 'Address is required.'],
-        minlength: [1, 'Address must be at least 1 character long.'],
-        maxlength: [300, 'Address cannot exceed 300 characters.']
+        required: true
     },
     postalCode: {
         type: String,
-        required: [true, 'Postal code is required.'],
-        match: [/^\d{6}$/, 'Postal code must be 6 digits long.']
+        required: true
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'CreatedBy is required.'],
+        required: true,
         immutable: true
     },
     updatedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'UpdatedBy is required.']
+        required: true
     },
     createdAt: {
         type: Date,
@@ -42,4 +41,4 @@ const productStoreSchema = new mongoose.Schema({
 
 const ProductStore = mongoose.model('ProductStore', productStoreSchema);
 
-module.exports = ProductStore;
+export default ProductStore;

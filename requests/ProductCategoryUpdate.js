@@ -23,7 +23,7 @@ const schema = Joi.object({
     'object.unknown': 'Unknown field(s) in the request body.',
 });
 
-export default function validateProductUpdateRequest(req, res, next) {
+export default function validateProductCategoryUpdateRequest(req, res, next) {
     try {
         const { error } = schema.validate(req.body);
         if (error) {

@@ -1,4 +1,3 @@
-import e from 'express';
 import mongoose from 'mongoose';
 
 const productCategorySchema = new mongoose.Schema({
@@ -9,6 +8,10 @@ const productCategorySchema = new mongoose.Schema({
     description: {
         type: String,
         required: false
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,

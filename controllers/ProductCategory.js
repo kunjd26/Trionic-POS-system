@@ -33,9 +33,9 @@ class ProductCategoryController {
 
             await db.connect();
             if (objectId) {
-                productCategory = await ProductCategory.findById(objectId, "title description createdBy updatedBy createdAt updatedAt");
+                productCategory = await ProductCategory.findOne({ _id: objectId, isDeleted: false }, "title description createdBy updatedBy createdAt updatedAt");
             } else {
-                productCategory = await ProductCategory.find({}, "title description createdBy updatedBy createdAt updatedAt");
+                productCategory = await ProductCategory.find({ isDeleted: false }, "title description createdBy updatedBy createdAt updatedAt");
             }
 
             if (!productCategory) {
@@ -55,7 +55,7 @@ class ProductCategoryController {
             const { userId } = req.user;
 
             await db.connect();
-            const productCategory = await ProductCategory.findByIdAndUpdate(objectId, { title, description, updatedBy: userId, updatedAt: new Date() }, { new: true, fields: 'title description updatedBy updatedAt' });
+            const productCategory = await ProductCategory.findOneAndUpdate({ _id: objectId, isDeleted: false }, { title, description, updatedBy: userId, updatedAt: new Date() }, { new: true, fields: 'title description updatedBy updatedAt' });
 
             if (!productCategory) {
                 return res.status(404).json({ status: 'fail', message: 'Product category not found.' });
@@ -73,7 +73,7 @@ class ProductCategoryController {
 
             await db.connect();
 
-            const productCategory = await ProductCategory.findByIdAndDelete(objectId);
+            const productCategory = await ProductCategory.findOneAndUpdate({ _id: objectId, isDeleted: false }, { isDeleted: true });
 
             if (!productCategory) {
                 return res.status(404).json({ status: 'fail', message: 'Product category not found.' });
