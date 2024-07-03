@@ -3,40 +3,39 @@ import mongoose from 'mongoose';
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Name is required.'],
-        minlength: [1, 'Name must be at least 1 character long.'],
-        maxlength: [60, 'Name cannot exceed 60 characters.']
+        required: true
     },
     description: {
         type: String,
-        required: false,
-        maxlength: [300, 'Description cannot exceed 300 characters.']
+        required: true
     },
     barcode: {
         type: String,
-        required: [true, 'Barcode is required.'],
-        match: [/^\d{13}$/, 'Barcode must be 13 digits long.']
+        required: true
     },
     weight: {
         type: Number,
-        required: [true, 'Weight is required.'],
-        min: [0, 'Weight must be greater than or equal to 0 gram.']
+        required: true
     },
     productCategoryId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'ProductCategory',
-        required: [true, 'ProductCategory is required.']
+        required: true
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'CreatedBy is required.'],
+        required: true,
         immutable: true
     },
     updatedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'UpdatedBy is required.']
+        required: true
     },
     createdAt: {
         type: Date,
@@ -51,4 +50,4 @@ const productSchema = new mongoose.Schema({
 
 const Product = mongoose.model('Product', productSchema);
 
-module.exports = Product;
+export default Product;
