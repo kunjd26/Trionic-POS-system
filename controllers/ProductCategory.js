@@ -33,9 +33,9 @@ class ProductCategoryController {
 
             await db.connect();
             if (objectId) {
-                productCategory = await ProductCategory.findOne({ _id: objectId, isDeleted: false }, "title description createdBy updatedBy createdAt updatedAt");
+                productCategory = await ProductCategory.findOne({ _id: objectId, isDeleted: false }, "title description updatedBy updatedAt");
             } else {
-                productCategory = await ProductCategory.find({ isDeleted: false }, "title description createdBy updatedBy createdAt updatedAt");
+                productCategory = await ProductCategory.find({ isDeleted: false }, "title description updatedBy updatedAt");
             }
 
             if (!productCategory) {

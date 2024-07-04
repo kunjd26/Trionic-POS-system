@@ -6,47 +6,49 @@ const schema = Joi.object({
         .min(1)
         .max(60)
         .messages({
-            'string.base': 'Name must be a string.',
-            'string.empty': 'Name is required.',
-            'string.min': 'Name must be at least 1 character.',
-            'string.max': 'Name must be at most 60 characters.',
-            'any.required': 'Name is required.',
+            'string.base': 'name must be a string.',
+            'string.empty': 'name is required.',
+            'string.min': 'name must be at least 1 character.',
+            'string.max': 'name must be at most 60 characters.',
+            'any.required': 'name is required.',
         }),
     description: Joi.string()
         .required()
         .min(1)
         .max(300)
         .messages({
-            'string.base': 'Description must be a string.',
-            'string.empty': 'Description is required.',
-            'string.min': 'Description must be at least 1 character.',
-            'string.max': 'Description must be at most 300 characters.',
-            'any.required': 'Description is required.',
+            'string.base': 'description must be a string.',
+            'string.empty': 'description is required.',
+            'string.min': 'description must be at least 1 character.',
+            'string.max': 'description must be at most 300 characters.',
+            'any.required': 'description is required.',
         }),
     barcode: Joi.string()
         .pattern(/^\d{13}$/)
         .required()
         .messages({
-            'string.base': 'Barcode must be a string.',
-            'string.empty': 'Barcode is required.',
-            'string.pattern.base': 'Barcode must be 13 digits long.',
-            'any.required': 'Barcode is required.',
+            'string.base': 'barcode must be a string.',
+            'string.empty': 'barcode is required.',
+            'string.pattern.base': 'barcode must be 13 digits long.',
+            'any.required': 'barcode is required.',
         }),
     weight: Joi.number()
         .required()
         .min(0.1)
         .messages({
-            'number.base': 'Weight must be a number.',
-            'number.empty': 'Weight is required.',
-            'number.min': 'Weight must be at least 0.1 grams.',
-            'any.required': 'Weight is required.',
+            'number.base': 'weight must be a number.',
+            'number.empty': 'weight is required.',
+            'number.min': 'weight must be at least 0.1 grams.',
+            'any.required': 'weight is required.',
         }),
     productCategoryId: Joi.string()
         .required()
+        .pattern(/^[0-9a-fA-F]{24}$/)
         .messages({
-            'string.base': 'ProductCategoryId must be a string.',
-            'string.empty': 'ProductCategoryId is required.',
-            'any.required': 'ProductCategoryId is required.',
+            'string.base': 'productCategoryId must be a string.',
+            'string.empty': 'productCategoryId is required.',
+            'any.required': 'productCategoryId is required.',
+            'string.pattern.base': 'productCategoryId must be a valid MongoDB Object ID.',
         }),
 }).unknown(false).messages({
     'object.unknown': 'Unknown field(s) in the request body.',

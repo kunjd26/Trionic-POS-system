@@ -4,56 +4,52 @@ const inventorySchema = new mongoose.Schema({
     productId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product',
-        required: [true, 'Product is required.']
+        required: true
     },
     productStoreId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'ProductStore',
-        required: [true, 'ProductStore is required.']
+        required: true
     },
     providerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Provider',
-        required: [true, 'Provider is required.']
+        required: true
     },
     price: {
         type: Number,
-        required: [true, 'Price is required.'],
-        min: [0, 'Price must be greater than or equal to 0.']
+        required: true
     },
     quantityUnit: {
         type: String,
-        required: [true, 'Quantity unit is required.'],
-        enum: {
-            values: ['gram', 'milliliter', 'piece'],
-            message: 'Quantity unit is invalid.'
-        }
+        required: true
     },
     availableQuantity: {
         type: Number,
-        required: [true, 'Available quantity is required.'],
-        min: [0, 'Available quantity must be greater than or equal to 0.']
+        required: true
     },
     minimumQuantityLimit: {
         type: Number,
-        required: [true, 'Minimum quantity limit is required.'],
-        min: [0, 'Minimum quantity limit must be greater than or equal to 0.']
+        required: true
     },
     maximumQuantityLimit: {
         type: Number,
-        required: [true, 'Maximum quantity limit is required.'],
-        min: [0, 'Maximum quantity limit must be greater than or equal to 0.']
+        required: true
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false,
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'CreatedBy is required.'],
+        required: true,
         immutable: true
     },
     updatedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'UpdatedBy is required.']
+        required: true
     },
     createdAt: {
         type: Date,

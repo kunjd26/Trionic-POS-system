@@ -35,9 +35,9 @@ class ProviderController {
 
             await db.connect();
             if (objectId) {
-                provider = await Provider.findOne({ _id: objectId, isDeleted: false }, "name address postalCode phone createdBy updatedBy createdAt updatedAt");
+                provider = await Provider.findOne({ _id: objectId, isDeleted: false }, "name address postalCode phone updatedBy updatedAt");
             } else {
-                provider = await Provider.find({ isDeleted: false }, "name address postalCode phone createdBy updatedBy createdAt updatedAt");
+                provider = await Provider.find({ isDeleted: false }, "name address postalCode phone updatedBy updatedAt");
             }
 
             if (!provider) {

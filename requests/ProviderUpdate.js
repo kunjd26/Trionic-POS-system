@@ -5,33 +5,33 @@ const schema = Joi.object({
         .min(1)
         .max(60)
         .messages({
-            'string.base': 'Name must be a string.',
-            'string.min': 'Name must be at least 1 character.',
-            'string.max': 'Name must be at most 60 characters.',
-            'any.required': 'Name is required.',
+            'string.base': 'name must be a string.',
+            'string.min': 'name must be at least 1 character.',
+            'string.max': 'name must be at most 60 characters.',
+            'any.required': 'name is required.',
         }),
     address: Joi.string()
         .min(1)
         .max(300)
         .messages({
-            'string.base': 'Address must be a string.',
-            'string.min': 'Address must be at least 1 character.',
-            'string.max': 'Address must be at most 300 characters.',
-            'any.required': 'Address is required.',
+            'string.base': 'address must be a string.',
+            'string.min': 'address must be at least 1 character.',
+            'string.max': 'address must be at most 300 characters.',
+            'any.required': 'address is required.',
         }),
     postalCode: Joi.string()
         .pattern(/^\d{6}$/)
         .messages({
-            'string.base': 'PostalCode must be a string.',
-            'string.pattern.base': 'PostalCode must be 6 digits long.',
-            'any.required': 'PostalCode is required.',
+            'string.base': 'postalCode must be a string.',
+            'string.pattern.base': 'postalCode must be 6 digits long.',
+            'any.required': 'postalCode is required.',
         }),
     phone: Joi.string()
         .pattern(/^\d{10}$/)
         .messages({
-            'string.base': 'Phone must be a string.',
-            'string.pattern.base': 'Phone must be 10 digits long.',
-            'any.required': 'Phone is required.',
+            'string.base': 'phone must be a string.',
+            'string.pattern.base': 'phone must be 10 digits long.',
+            'any.required': 'phone is required.',
         }),
 }).unknown(false).messages({
     'object.unknown': 'Unknown field(s) in the request body.',

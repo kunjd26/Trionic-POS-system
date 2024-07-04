@@ -6,20 +6,20 @@ const schema = Joi.object({
         .min(1)
         .max(60)
         .messages({
-            'string.base': 'Title must be a string.',
-            'string.empty': 'Title is required.',
-            'string.min': 'Title must be at least 1 character.',
-            'string.max': 'Title must be at most 60 characters.',
-            'any.required': 'Title is required.',
+            'string.base': 'title must be a string.',
+            'string.empty': 'title is required.',
+            'string.min': 'title must be at least 1 character.',
+            'string.max': 'title must be at most 60 characters.',
+            'any.required': 'title is required.',
         }),
     description: Joi.string()
         .min(1)
         .max(300)
         .messages({
-            'string.base': 'Description must be a string.',
-            'string.min': 'Description must be at least 1 character.',
-            'string.max': 'Description must be at most 300 characters.',
-            'any.required': 'Description is required.',
+            'string.base': 'description must be a string.',
+            'string.min': 'description must be at least 1 character.',
+            'string.max': 'description must be at most 300 characters.',
+            'any.required': 'description is required.',
         }),
 }).unknown(false).messages({
     'object.unknown': 'Unknown field(s) in the request body.',

@@ -34,9 +34,9 @@ class ProductStoreController {
 
             await db.connect();
             if (objectId) {
-                productStore = await ProductStore.findOne({ _id: objectId, isDeleted: false }, "name address postalCode createdBy updatedBy createdAt updatedAt");
+                productStore = await ProductStore.findOne({ _id: objectId, isDeleted: false }, "name address postalCode updatedBy updatedAt");
             } else {
-                productStore = await ProductStore.find({ isDeleted: false }, "name address postalCode createdBy updatedBy createdAt updatedAt");
+                productStore = await ProductStore.find({ isDeleted: false }, "name address postalCode updatedBy updatedAt");
             }
 
             if (!productStore) {

@@ -13,18 +13,15 @@ class UserController {
 
             await db.connect();
 
-            const user = new User({ name, email, role, phone, password: hashedPassword });
+            const user = new User({ name, email, role, phone, password: hashedPassword, createdBy: req.user.userId, updatedBy: req.user.userId });
 
-            await user.save();
+            const user1 = await user.save();
 
-            const response = {
-                userId: user.userId,
-                name: user.name,
-                email: user.email,
-                role: user.role,
-            }
+            // Remove some private fields from the response.
+            user1.password = undefined;
+            user1.isDeleted = undefined;
 
-            return res.status(201).json({ status: 'success', data: response });
+            return res.status(201).json({ status: 'success', data: user1 });
         } catch (error) {
             next(error);
         }
@@ -37,9 +34,9 @@ class UserController {
 
             await db.connect();
             if (objectId) {
-                user = await User.findOne({ _id: objectId, isDeleted: false }, "_id, userId name email phone role permissions");
+                user = await User.findOne({ _id: objectId, isDeleted: false }, "_id userId name email phone role permissions updatedAt updatedBy");
             } else {
-                user = await User.find({ isDeleted: false }, "_id, userId name email phone role permissions");
+                user = await User.find({ isDeleted: false }, "_id userId name email phone role permissions updatedAt updatedBy");
             }
 
             if (!user) {
@@ -56,6 +53,7 @@ class UserController {
         try {
             const objectId = req.params.objectId;
             const { name, email, role, phone, permissions } = req.body;
+            const { userId } = req.user;
             let { password } = req.body;
 
             if (password) {
@@ -63,7 +61,7 @@ class UserController {
             }
 
             await db.connect();
-            const user = await User.findOneAndUpdate({ _id: objectId, isDeleted: false }, { name, email, role, permissions, phone, password, updatedAt: new Date() }, { new: true, fields: 'userid name email phone role permissions' });
+            const user = await User.findOneAndUpdate({ _id: objectId, isDeleted: false }, { name, email, role, permissions, phone, password, updatedBy: userId, updatedAt: new Date() }, { new: true, fields: "_id userId name email phone role permissions updatedAt updatedBy" });
 
             if (!user) {
                 return res.status(404).json({ status: 'fail', message: 'User not found.' });

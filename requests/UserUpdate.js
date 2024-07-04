@@ -5,49 +5,49 @@ const schema = Joi.object({
         .min(1)
         .max(60)
         .messages({
-            'string.base': 'Name must be a string.',
-            'string.empty': 'Name is required.',
-            'string.min': 'Name must be at least 1 character.',
-            'string.max': 'Name must be at most 60 characters.',
-            'any.required': 'Name is required.',
+            'string.base': 'name must be a string.',
+            'string.empty': 'name is required.',
+            'string.min': 'name must be at least 1 character.',
+            'string.max': 'name must be at most 60 characters.',
+            'any.required': 'name is required.',
         }),
     email: Joi.string()
         .email({ tlds: { allow: false } })
         .messages({
-            'string.base': 'Email must be a string.',
-            'string.empty': 'Email is required.',
+            'string.base': 'email must be a string.',
+            'string.empty': 'email is required.',
             'string.email': 'Invalid email format.',
-            'any.required': 'Email is required.',
+            'any.required': 'email is required.',
         }),
     role: Joi.string()
         .valid('admin', 'manager', 'staff')
         .messages({
-            'string.base': 'Role must be a string.',
-            'string.empty': 'Role is required.',
-            'any.only': 'Role is invalid.',
-            'any.required': 'Role is required.',
+            'string.base': 'role must be a string.',
+            'string.empty': 'role is required.',
+            'any.only': 'role is invalid.',
+            'any.required': 'role is required.',
         }),
     phone: Joi.string()
         .pattern(/^\d{10}$/)
         .messages({
-            'string.base': 'Phone must be a string.',
-            'string.empty': 'Phone is required.',
-            'string.pattern.base': 'Phone must be 10 digits long.',
-            'any.required': 'Phone is required.',
+            'string.base': 'phone must be a string.',
+            'string.empty': 'phone is required.',
+            'string.pattern.base': 'phone must be 10 digits long.',
+            'any.required': 'phone is required.',
         }),
     password: Joi.string()
         .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/)
         .messages({
-            'string.base': 'Password must be a string.',
-            'string.empty': 'Password is required.',
-            'string.pattern.base': 'Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one digit, and one special character.',
-            'any.required': 'Password is required.',
+            'string.base': 'password must be a string.',
+            'string.empty': 'password is required.',
+            'string.pattern.base': 'password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one digit, and one special character.',
+            'any.required': 'password is required.',
         }),
     permissions: Joi.array()
         .items(Joi.string())
         .messages({
-            'array.base': 'Permissions must be an array.',
-            'any.required': 'Permissions is required.',
+            'array.base': 'permissions must be an array.',
+            'any.required': 'permissions is required.',
         }),
 }).unknown(false).messages({
     'object.unknown': 'Unknown field(s) in the request body.',

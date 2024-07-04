@@ -11,9 +11,9 @@ const schema = Joi.object({
     password: Joi.string()
         .required()
         .messages({
-            'string.base': 'Password must be a string.',
-            'string.empty': 'Password is required.',
-            'any.required': 'Password is required.',
+            'string.base': 'password must be a string.',
+            'string.empty': 'password is required.',
+            'any.required': 'password is required.',
         }),
 }).unknown(false).messages({
     'object.unknown': 'Unknown field(s) in the request body.',
