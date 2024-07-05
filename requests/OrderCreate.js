@@ -8,15 +8,6 @@ const schema = Joi.object({
             'date.empty': 'orderDate is required.',
             'any.required': 'orderDate is required.',
         }),
-    itemCount: Joi.number()
-        .required()
-        .min(1)
-        .messages({
-            'number.base': 'itemCount must be a number.',
-            'number.empty': 'itemCount is required.',
-            'number.min': 'itemCount must be at least 1.',
-            'any.required': 'itemCount is required.',
-        }),
     orderType: Joi.string()
         .required()
         .valid('online', 'offline')

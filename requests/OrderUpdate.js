@@ -6,13 +6,6 @@ const schema = Joi.object({
             'date.base': 'orderDate must be a valid date.',
             'any.required': 'orderDate is required.',
         }),
-    itemCount: Joi.number()
-        .min(1)
-        .messages({
-            'number.base': 'itemCount must be a number.',
-            'number.min': 'itemCount must be at least 1.',
-            'any.required': 'itemCount is required.',
-        }),
     orderType: Joi.string()
         .valid('online', 'offline')
         .messages({
@@ -63,7 +56,7 @@ const schema = Joi.object({
     'object.unknown': 'Unknown field(s) in the request body.',
 });
 
-export default function validateOrderCreateRequest(req, res, next) {
+export default function validateOrderUpdateRequest(req, res, next) {
     try {
         const { error } = schema.validate(req.body);
         if (error) {

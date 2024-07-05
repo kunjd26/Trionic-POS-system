@@ -4,42 +4,43 @@ const invoiceSchema = new mongoose.Schema({
     customerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Customer',
-        required: [true, 'Customer is required.']
+        required: true
     },
     orderId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Order',
-        required: [true, 'Order is required.']
+        required: true
     },
     invoiceDate: {
         type: Date,
-        required: [true, 'Invoice date is required.']
+        required: true
     },
     tax: {
         type: Number,
-        required: [true, 'Tax is required.'],
-        min: [0, 'Tax must be greater than or equal to 0.']
+        required: true
     },
     discount: {
         type: Number,
-        required: false,
-        min: [0, 'Discount must be greater than or equal to 0.']
+        required: false
     },
     total: {
         type: Number,
-        required: [true, 'Total is required.'],
-        min: [0, 'Total must be greater than or equal to 0.']
+        required: true
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'CreatedBy is required.'],
+        required: true,
         immutable: true
     },
     updatedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'UpdatedBy is required.']
+        required: true
     },
     createdAt: {
         type: Date,

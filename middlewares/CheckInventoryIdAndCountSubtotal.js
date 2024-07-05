@@ -13,6 +13,7 @@ export default async function checkInventoryIdAndCountSubtotal(req, res, next) {
 
         // orderDetails is a array contain objects and object contain two field first inventoryId and quantity now check all inventory id are valid and is present in database and count subtotal.
         let subtotal = 0;
+        let itemCount = 0;
 
         for (let detail of orderDetails) {
             const inventoryId = detail.inventoryId; // Assuming this is how you access inventoryId
@@ -30,9 +31,11 @@ export default async function checkInventoryIdAndCountSubtotal(req, res, next) {
             }
 
             subtotal += (inventory.price * detail.quantity);
+            itemCount++;
         }
 
         req.body.subtotal = subtotal;
+        req.body.itemCount = itemCount;
 
         return next();
     } catch (error) {
