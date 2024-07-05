@@ -40,7 +40,7 @@ class ProductController {
                     .populate('ProductCategoryId', 'title description')
                     .select("name description weight barcode updatedBy updatedAt");
             } else {
-                product = await Product.find({ _id: objectId, isDeleted: false })
+                product = await Product.find({ isDeleted: false })
                     .populate('ProductCategoryId', 'title description')
                     .select("name description weight barcode updatedBy updatedAt");
             }

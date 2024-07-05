@@ -3,44 +3,32 @@ import mongoose from "mongoose";
 const customerSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Name is required'],
-        minlength: [1, 'Name must be at least 1 character.'],
-        maxlength: [60, 'Name must be at most 60 characters.']
+        required: true
     },
     gender: {
         type: String,
-        required: [true, 'Gender is required.'],
-        enum: {
-            values: ['male', female, 'not specified'],
-            message: "Gender is invalid."
-        }
+        required: true
     },
     email: {
         type: String,
-        required: [true, 'Email is required.'],
-        unique: true,
-        validate: {
-            validator: function (value) {
-                // Regular expression to validate email format
-                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-            },
-            message: 'Invalid email format.'
-        }
+        required: true,
+        unique: true
     },
     phone: {
         type: String,
-        required: [true, 'Phone is required.']
+        required: true
     },
     address: {
         type: String,
-        required: [true, 'Address is required.'],
-        minlength: [1, 'Address must be at least 1 character long.'],
-        maxlength: [300, 'Address cannot exceed 300 characters.']
+        required: true
     },
     postalCode: {
         type: String,
-        required: [true, 'Postal code is required.'],
-        match: [/^\d{6}$/, 'Postal code must be 6 digits long.']
+        required: true,
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
