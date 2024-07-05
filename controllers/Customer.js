@@ -37,11 +37,9 @@ class CustomerController {
 
             await db.connect();
             if (objectId) {
-                customer = await Customer.findOne({ _id: objectId, isDeleted: false }, "name gender email phone addressed postalCode updatedBy updatedAt");
+                customer = await Customer.findOne({ _id: objectId, isDeleted: false }, "name gender email phone address postalCode updatedBy updatedAt");
             } else {
-                customer = await Customer.find({ _id: objectId, isDeleted: false })
-                    .select("name gender email phone addressed postalCode updatedBy updatedAt");
-                customer = await Customer.find({ isDeleted: false }, "name gender email phone addressed postalCode updatedBy updatedAt");
+                customer = await Customer.find({ isDeleted: false }, "name gender email phone address postalCode updatedBy updatedAt");
             }
 
             if (!customer) {

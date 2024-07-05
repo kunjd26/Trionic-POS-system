@@ -55,7 +55,7 @@ class ProductCategoryController {
             const { userId } = req.user;
 
             await db.connect();
-            const productCategory = await ProductCategory.findOneAndUpdate({ _id: objectId, isDeleted: false }, { title, description, updatedBy: userId, updatedAt: new Date() }, { new: true, fields: 'title description updatedBy updatedAt' });
+            const productCategory = await ProductCategory.findOneAndUpdate({ _id: objectId, isDeleted: false }, { title, description, updatedBy: userId, updatedAt: new Date() }, { new: true, fields: "title description updatedBy updatedAt" });
 
             if (!productCategory) {
                 return res.status(404).json({ status: 'fail', message: 'Product category not found.' });

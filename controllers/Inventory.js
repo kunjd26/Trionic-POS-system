@@ -23,7 +23,7 @@ class ProductController {
             const inventory1 = await inventory.save();
 
             if (!inventory1) {
-                return res.status(400).json({ status: 'fail', message: 'Failed to create product category.' });
+                return res.status(400).json({ status: 'fail', message: 'Failed to create inventory.' });
             }
 
             return res.status(201).json({ status: 'success', data: inventory1 });
@@ -69,7 +69,7 @@ class ProductController {
             const { userId } = req.user;
 
             await db.connect();
-            const inventory = await Inventory.findOneAndUpdate({ _id: objectId, isDeleted: false }, { productStoreId, providerId, price, quantityUnit, availableQuantity, minimumQuantityLimit, maximumQuantityLimit, updatedBy: userId, updatedAt: new Date() }, { new: true, fields: 'productId productStoreId providerId price quantityUnit availableQuantity minimumQuantityLimit maximumQuantityLimit updatedBy updatedAt' });
+            const inventory = await Inventory.findOneAndUpdate({ _id: objectId, isDeleted: false }, { productStoreId, providerId, price, quantityUnit, availableQuantity, minimumQuantityLimit, maximumQuantityLimit, updatedBy: userId, updatedAt: new Date() }, { new: true, fields: "productId productStoreId providerId price quantityUnit availableQuantity minimumQuantityLimit maximumQuantityLimit updatedBy updatedAt" });
 
             if (!inventory) {
                 return res.status(404).json({ status: 'fail', message: 'Inventory not found.' });

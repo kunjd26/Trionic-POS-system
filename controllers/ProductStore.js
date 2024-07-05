@@ -56,7 +56,7 @@ class ProductStoreController {
             const { userId } = req.user;
 
             await db.connect();
-            const productStore = await ProductStore.findOneAndUpdate({ _id: objectId, isDeleted: false }, { name, address, postalCode, updatedBy: userId, updatedAt: new Date() }, { new: true, fields: 'name address postalCode updatedBy updatedAt' });
+            const productStore = await ProductStore.findOneAndUpdate({ _id: objectId, isDeleted: false }, { name, address, postalCode, updatedBy: userId, updatedAt: new Date() }, { new: true, fields: "name address postalCode updatedBy updatedAt" });
 
             if (!productStore) {
                 return res.status(404).json({ status: 'fail', message: 'Product store not found.' });

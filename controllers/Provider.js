@@ -57,7 +57,7 @@ class ProviderController {
             const { userId } = req.user;
 
             await db.connect();
-            const provider = await Provider.findOneAndUpdate({ _id: objectId, isDeleted: false }, { name, address, postalCode, updatedBy: userId, updatedAt: new Date() }, { new: true, fields: 'name address postalCode updatedBy updatedAt' });
+            const provider = await Provider.findOneAndUpdate({ _id: objectId, isDeleted: false }, { name, address, postalCode, updatedBy: userId, updatedAt: new Date() }, { new: true, fields: "name address postalCode phone updatedBy updatedAt" });
 
             if (!provider) {
                 return res.status(404).json({ status: 'fail', message: 'Provider not found.' });

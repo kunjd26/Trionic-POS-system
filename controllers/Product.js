@@ -20,7 +20,7 @@ class ProductController {
             const product1 = await product.save();
 
             if (!product1) {
-                return res.status(400).json({ status: 'fail', message: 'Failed to create product category.' });
+                return res.status(400).json({ status: 'fail', message: 'Failed to create product.' });
             }
 
             return res.status(201).json({ status: 'success', data: product1 });
@@ -62,7 +62,7 @@ class ProductController {
             const { userId } = req.user;
 
             await db.connect();
-            const product = await Product.findOneAndUpdate({ _id: objectId, isDeleted: false }, { name, description, weight, barcode, productCategoryId, updatedBy: userId, updatedAt: new Date() }, { new: true, fields: 'name description weight barcode productCategoryId updatedBy updatedAt' });
+            const product = await Product.findOneAndUpdate({ _id: objectId, isDeleted: false }, { name, description, weight, barcode, productCategoryId, updatedBy: userId, updatedAt: new Date() }, { new: true, fields: "name description weight barcode productCategoryId updatedBy updatedAt" });
 
             if (!product) {
                 return res.status(404).json({ status: 'fail', message: 'Product not found.' });

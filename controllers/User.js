@@ -17,6 +17,10 @@ class UserController {
 
             const user1 = await user.save();
 
+            if (!user1) {
+                return res.status(400).json({ status: 'fail', message: 'Failed to create user.' });
+            }
+
             // Remove some private fields from the response.
             user1.password = undefined;
             user1.isDeleted = undefined;

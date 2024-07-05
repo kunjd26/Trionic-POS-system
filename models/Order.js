@@ -3,56 +3,50 @@ import mongoose from "mongoose";
 const orderSchema = new mongoose.Schema({
     orderDate: {
         type: Date,
-        required: [true, 'Order date is required.']
+        required: true
     },
     itemCount: {
         type: Number,
-        required: [true, 'Item count is required.'],
-        min: [0, 'Item count must be greater than or equal to 0.']
+        required: true
     },
     subtotal: {
         type: Number,
-        required: [true, 'Subtotal is required.'],
-        min: [0, 'Subtotal must be greater than or equal to 0.']
+        required: true
     },
     orderType: {
         type: String,
-        required: [true, 'Order type is required.'],
-        enum: {
-            values: ['online', 'offline'],
-            message: 'Order type is invalid.'
-        }
+        required: true,
+        // values: ['online', 'offline']
     },
     status: {
         type: String,
-        required: [true, 'Status is required.'],
-        enum: {
-            values: ['pending', 'processing', 'completed', 'cancelled'],
-            message: 'Status is invalid.'
-        }
+        required: true
+        // values: ['pending', 'processing', 'completed', 'cancelled']
     },
     orderDetails: [{
         inventoryId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Inventory',
-            required: [true, 'InventoryId is required.']
+            required: true
         },
         quantity: {
             type: Number,
-            required: [true, 'Quantity is required.'],
-            min: [0, 'Quantity must be greater than or equal to 0.']
+            required: true
         }
     }],
+    isDeleted: {
+        type: Boolean,
+        default: false
+    },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'CreatedBy is required.'],
-        immutable: true
+        required: true
     },
     updatedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'UpdatedBy is required.']
+        required: true
     },
     createdAt: {
         type: Date,
