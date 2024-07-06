@@ -23,7 +23,7 @@ const schema = Joi.object({
             'any.required': 'price is required.',
         }),
     quantityUnit: Joi.string()
-        .valid('gram', 'milliliter', 'piece')
+        .valid('kilogram', 'litter', 'piece')
         .messages({
             'string.base': 'quantityUnit must be a string.',
             'string.empty': 'quantityUnit is required.',

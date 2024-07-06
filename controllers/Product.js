@@ -37,11 +37,11 @@ class ProductController {
             await db.connect();
             if (objectId) {
                 product = await Product.findOne({ _id: objectId, isDeleted: false })
-                    .populate('ProductCategoryId', 'title description')
+                    .populate('productCategoryId', 'title description')
                     .select("name description weight barcode updatedBy updatedAt");
             } else {
                 product = await Product.find({ isDeleted: false })
-                    .populate('ProductCategoryId', 'title description')
+                    .populate('productCategoryId', 'title description')
                     .select("name description weight barcode updatedBy updatedAt");
             }
 
