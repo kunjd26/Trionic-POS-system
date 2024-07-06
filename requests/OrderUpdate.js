@@ -47,7 +47,7 @@ const schema = Joi.object({
             'object.includesRequiredUnknowns': 'orderDetails must contain valid inventory items.',
             'any.required': 'orderDetails data required in array.',
         })
-    ).required().messages({
+    ).messages({
         'array.base': 'orderDetails must be an array.',
         'array.includesRequiredUnknowns': 'orderDetails must contain valid inventory items.',
         'any.required': 'orderDetails is required.',
