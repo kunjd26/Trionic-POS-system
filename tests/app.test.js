@@ -234,9 +234,9 @@ describe("Inventory API endpoints.", () => {
             "providerId": providerId,
             "price": 123,
             "quantityUnit": "kilogram",
-            "availableQuantity": 20000,
-            "minimumQuantityLimit": 5000,
-            "maximumQuantityLimit": 25000
+            "availableQuantity": 10,
+            "minimumQuantityLimit": 5,
+            "maximumQuantityLimit": 25
         }).set("Authorization", `Bearer ${token}`);
         expect(res.statusCode).toBe(201);
         expect(res.body.status).toBe("success");
