@@ -12,7 +12,7 @@ mongoose.connection.on('close', () => console.log('close'));
 
 class DatabaseConfig {
     async connect() {
-        await mongoose.connect(env.DB_CONNECTION_STRING)
+        await mongoose.connect(env.TEST_DB_CONNECTION_STRING)
     }
 
     async disconnect() {
