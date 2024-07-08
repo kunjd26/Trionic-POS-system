@@ -1,9 +1,23 @@
 import app from "../app";
 import request from "supertest";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, beforeAll } from "vitest";
+import mongoose from "mongoose";
+import db from "../config/DatabaseConfig.js";
 
 const token = "bfa56239-fe00-4710-80cf-82bfd7b7d36c";
-let objectId;
+let objectId, productCategoryId, productStoreId, productId, providerId, inventoryId, customerId, orderId;
+
+// Clean database before testing
+beforeAll(async () => {
+    await db.connect();
+    const collections = await mongoose.connection.db.collections();
+    for (let collection of collections) {
+        if (collection.collectionName !== "users" && collection.collectionName !== "usertokens") {
+            await collection.deleteMany({});
+        }
+    }
+});
+
 
 // Product Categories
 describe("Product categories API endpoint.", () => {
@@ -15,6 +29,7 @@ describe("Product categories API endpoint.", () => {
         expect(res.statusCode).toBe(201);
         expect(res.body.status).toBe("success");
         objectId = res.body.data._id;
+        productCategoryId = res.body.data._id;
     });
 
     it("should return all product categories", async () => {
@@ -53,7 +68,6 @@ describe("Product categories API endpoint.", () => {
 });
 
 
-
 // Product stores
 describe("Product stores API endpoint.", () => {
     it("should create a product store", async () => {
@@ -65,6 +79,7 @@ describe("Product stores API endpoint.", () => {
         expect(res.statusCode).toBe(201);
         expect(res.body.status).toBe("success");
         objectId = res.body.data._id;
+        productStoreId = res.body.data._id;
     });
 
     it("should return all product stores", async () => {
@@ -103,7 +118,6 @@ describe("Product stores API endpoint.", () => {
 });
 
 
-
 // Products
 describe("Product API endpoints", () => {
     it("should create a product", async () => {
@@ -112,11 +126,12 @@ describe("Product API endpoints", () => {
             "description": "Foo description",
             "barcode": "1234567890123",
             "weight": 123,
-            "productCategoryId": "668912926458684a31c48e60"
+            "productCategoryId": productCategoryId
         }).set("Authorization", `Bearer ${token}`);
         expect(res.statusCode).toBe(201);
         expect(res.body.status).toBe("success");
         objectId = res.body.data._id;
+        productId = res.body.data._id;
     });
 
     it("should return all products", async () => {
@@ -159,7 +174,6 @@ describe("Product API endpoints", () => {
 });
 
 
-
 // Providers
 describe("Provider API endpoints.", () => {
     it("should create a provider", async () => {
@@ -172,6 +186,7 @@ describe("Provider API endpoints.", () => {
         expect(res.statusCode).toBe(201);
         expect(res.body.status).toBe("success");
         objectId = res.body.data._id;
+        providerId = res.body.data._id;
     });
 
     it("should return all providers", async () => {
@@ -210,14 +225,13 @@ describe("Provider API endpoints.", () => {
 });
 
 
-
 // Inventory
 describe("Inventory API endpoints.", () => {
     it("should create an inventory", async () => {
         const res = await request(app).post("/api/inventories").send({
-            "productId": "6689144d6458684a31c48ee7",
-            "productStoreId": "668913286458684a31c48e93",
-            "providerId": "668915c26458684a31c48f42",
+            "productId": productId,
+            "productStoreId": productStoreId,
+            "providerId": providerId,
             "price": 123,
             "quantityUnit": "kilogram",
             "availableQuantity": 20000,
@@ -227,6 +241,7 @@ describe("Inventory API endpoints.", () => {
         expect(res.statusCode).toBe(201);
         expect(res.body.status).toBe("success");
         objectId = res.body.data._id;
+        inventoryId = res.body.data._id;
     });
 
     it("should return all inventories", async () => {
@@ -264,7 +279,6 @@ describe("Inventory API endpoints.", () => {
 });
 
 
-
 // Customers
 describe("Customer API endpoints.", () => {
     it("should create a customer", async () => {
@@ -272,13 +286,14 @@ describe("Customer API endpoints.", () => {
             "name": "foo name",
             "gender": "female",
             "email": "foo@foo.foo",
-            "phone": "9845632178",
+            "phone": "9876543210",
             "address": "foo address",
-            "postalCode": "123456"
+            "postalCode": "654321"
         }).set("Authorization", `Bearer ${token}`);
         expect(res.statusCode).toBe(201);
         expect(res.body.status).toBe("success");
         objectId = res.body.data._id;
+        customerId = res.body.data._id;
     });
 
     it("should return all customers", async () => {
@@ -317,7 +332,6 @@ describe("Customer API endpoints.", () => {
 });
 
 
-
 // Orders
 describe("Order API endpoints.", () => {
     it("should create an order", async () => {
@@ -327,7 +341,7 @@ describe("Order API endpoints.", () => {
             "status": "processing",
             "orderDetails": [
                 {
-                    "inventoryId": "668919076458684a31c48fa7",
+                    "inventoryId": inventoryId,
                     "quantity": 2
                 }
             ]
@@ -335,6 +349,7 @@ describe("Order API endpoints.", () => {
         expect(res.statusCode).toBe(201);
         expect(res.body.status).toBe("success");
         objectId = res.body.data._id;
+        orderId = res.body.data._id;
     });
 
     it("should return all orders", async () => {
@@ -376,8 +391,8 @@ describe("Order API endpoints.", () => {
 describe("Invoice API endpoints.", () => {
     it("should create an invoice", async () => {
         const res = await request(app).post("/api/invoices").send({
-            "customerId": "668914d86458684a31c48f00",
-            "orderId": "66891e0ac6fe1afe7c297231",
+            "customerId": customerId,
+            "orderId": orderId,
             "invoiceDate": "2023-06-01T00:00:00.000Z",
             "tax": 18,
             "discount": 10,
