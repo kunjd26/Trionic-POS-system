@@ -1,0 +1,1621 @@
+{
+	"info": {
+		"_postman_id": "4a66149c-c940-46f2-bd42-b179422414bd",
+		"name": "Trionic-pos-system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27040755"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Signin user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"monty@example.com\",\r\n    \"password\": \"Monty@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/users/signin",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signout user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/users/signout",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"signout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create a user.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "40765302-bfeb-4ceb-a9ce-ae6eb3bc8446",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Foobar\",\r\n    \"email\": \"foobar3@foo.foo\",\r\n    \"role\": \"staff\",\r\n    \"phone\": \"9876543210\",\r\n    \"password\": \"Foobar@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/users",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/users/",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a user.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/users/668434aeca77228c61eec441",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"668434aeca77228c61eec441"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a user.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Foobar new\",\r\n    \"permissions\": [\"all:cru\"],\r\n    \"password\": \"Foo@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/users/668434aeca77228c61eec441",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"668434aeca77228c61eec441"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a user.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/users/668434aeca77228c61eec441",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"668434aeca77228c61eec441"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product category",
+			"item": [
+				{
+					"name": "Create a product category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"title\": \"Condiments\",\r\n    \"description\": \"Various condiments\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/product-categories",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"product-categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all product category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/product-categories/",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"product-categories",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a product category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/product-categories/66842a3e2340e118d300687f",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"product-categories",
+								"66842a3e2340e118d300687f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a product category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Foobar\",\r\n    \"description\": \"Foobar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/product-categories/66842a3e2340e118d300687f",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"product-categories",
+								"66842a3e2340e118d300687f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a product category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/product-categories/66842a3e2340e118d300687f",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"product-categories",
+								"66842a3e2340e118d300687f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product store",
+			"item": [
+				{
+					"name": "Create a product store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"Navsari Store\",\r\n    \"address\": \"Grid Road, Navsari, Gujarat\",\r\n    \"postalCode\": \"396445\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/product-stores",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"product-stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all product store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/product-stores/",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"product-stores",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a product store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/product-stores/6684358bca77228c61eec49a",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"product-stores",
+								"6684358bca77228c61eec49a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a product store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Foobar new\",\r\n    \"address\": \"Foobar\",\r\n    \"postalCode\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/product-stores/6684358bca77228c61eec49a",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"product-stores",
+								"6684358bca77228c61eec49a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a product stores",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/product-stores/6684358bca77228c61eec49a",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"product-stores",
+								"6684358bca77228c61eec49a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create a product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Fafda\",\r\n    \"description\": \"Crispy snack\",\r\n    \"barcode\": \"8901234567008\",\r\n    \"weight\": 450,\r\n    \"productCategoryId\": \"668912926458684a31c48e60\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/products",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/products",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/products/66858be104eb7f03f77bf216",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"66858be104eb7f03f77bf216"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Foobar new\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/products/66858be104eb7f03f77bf216",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"66858be104eb7f03f77bf216"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/products/66858be104eb7f03f77bf216",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"66858be104eb7f03f77bf216"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Create a customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rekha Rana\",\r\n    \"gender\": \"female\",\r\n    \"email\": \"rekha.rana@example.com\",\r\n    \"phone\": \"9876543219\",\r\n    \"address\": \"707, Pearl Mansion, Anand, Gujarat\",\r\n    \"postalCode\": \"388001\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/customers",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all customers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/customers",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/customers/66875aad4cd456aba8d45ac1",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"customers",
+								"66875aad4cd456aba8d45ac1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Foobar new\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/customers/66875aad4cd456aba8d45ac1",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"customers",
+								"66875aad4cd456aba8d45ac1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/customers/66875aad4cd456aba8d45ac1",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"customers",
+								"66875aad4cd456aba8d45ac1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create a order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderDate\": \"2023-06-06T00:00:00.000Z\",\r\n    \"orderType\": \"offline\",\r\n    \"status\": \"processing\",\r\n    \"orderDetails\": [\r\n      {\r\n        \"inventoryId\": \"668b820294e950a0db8c2896\",\r\n        \"quantity\": 2\r\n      }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/orders",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/orders",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/orders/6687e7ce300973140d25dbe2",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"6687e7ce300973140d25dbe2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"orderDetails\": [\r\n\t\t{\r\n\t\t\t\"inventoryId\": \"6686cf589b7b740e2ef8dc34\",\r\n\t\t\t\"quantity\": 1\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"inventoryId\": \"66880e384ba1577efbf71d61\",\r\n\t\t\t\"quantity\": 1\r\n\t\t}\r\n\t]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/orders/6687e907300973140d25dbe9",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"6687e907300973140d25dbe9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/orders/6687e7ce300973140d25dbe2",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"6687e7ce300973140d25dbe2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoice",
+			"item": [
+				{
+					"name": "Create a invoice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\": \"668914d86458684a31c48f00\",\r\n    \"orderId\": \"66891e0ac6fe1afe7c297231\",\r\n    \"invoiceDate\": \"2023-06-01T00:00:00.000Z\",\r\n    \"tax\": 18,\r\n    \"discount\": 10,\r\n\t\"paymentType\": \"upi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/invoices",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all invoices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/invoices",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a invoice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/invoices/66882b18f45bf46ea2344f27",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"invoices",
+								"66882b18f45bf46ea2344f27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a invoice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"orderId\": \"6687e7ce300973140d25dbe2\",\r\n\t\"discount\": 10,\r\n\t\"tax\": 18\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/invoices/66882b18f45bf46ea2344f27",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"invoices",
+								"66882b18f45bf46ea2344f27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a invoice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/invoices/66882b18f45bf46ea2344f27",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"invoices",
+								"66882b18f45bf46ea2344f27"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inventory",
+			"item": [
+				{
+					"name": "Create a inventory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"6689144d6458684a31c48ee7\",\r\n    \"productStoreId\": \"668913286458684a31c48e93\",\r\n    \"providerId\": \"668915c26458684a31c48f42\",\r\n    \"price\": 400,\r\n    \"quantityUnit\": \"gram\",\r\n    \"availableQuantity\": 20000,\r\n    \"minimumQuantityLimit\": 5000,\r\n    \"maximumQuantityLimit\": 25000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/inventories",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"inventories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all inventories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/inventories",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"inventories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a inventory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/inventories/668919076458684a31c48fa7",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"inventories",
+								"668919076458684a31c48fa7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a inventory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"availableQuantity\": 11\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/inventories/6686cf589b7b740e2ef8dc34",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"inventories",
+								"6686cf589b7b740e2ef8dc34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a inventories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/inventories/668687c541fb1822b21862eb",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"inventories",
+								"668687c541fb1822b21862eb"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Provider",
+			"item": [
+				{
+					"name": "Create a provider",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Trivedi Condiments\",\r\n    \"address\": \"Dandi Road, Navsari, Gujarat\",\r\n    \"postalCode\": \"396450\",\r\n    \"phone\": \"9876543219\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/providers",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"providers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all provider",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/providers/",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"providers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a provider",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/providers/668435cfca77228c61eec4ca",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"providers",
+								"668435cfca77228c61eec4ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a provider",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Foobar new\",\r\n    \"address\": \"Foobar new\",\r\n    \"postalCode\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/providers/668435cfca77228c61eec4ca",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"providers",
+								"668435cfca77228c61eec4ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a provider",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/providers/668435cfca77228c61eec4ca",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"providers",
+								"668435cfca77228c61eec4ca"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "APP_URL",
+			"value": "http://127.0.0.1:65535",
+			"type": "string"
+		},
+		{
+			"key": "USER_TOKEN",
+			"value": "40765302-bfeb-4ceb-a9ce-ae6eb3bc8446"
+		}
+	]
+}
